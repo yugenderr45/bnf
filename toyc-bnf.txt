@@ -1,0 +1,96 @@
+< Program >         ::= < Function-Def >
+                        | <  Program > < Function-Def >
+    
+
+< Function-Def >    ::= < Signature > < Block >
+
+
+< Signature >       ::= < Type > < Identifier > "(" ")"
+                        | < Type > < Identifier > "(" < Params > ")"
+    
+
+< Params >          ::= < Params > "," < Decl >
+                        | < Decl>
+    
+    
+< Block >           ::= "{" < Statement-List > "}"
+                        | "{" "}"
+
+
+< Statement-List >  ::= < Statement-List > < Statement >
+                        | < Statement >
+
+
+< Statement >       ::= < Decl > ";" 
+                        | < Assign > ";" 
+                        | < Expr > ";" 
+                        | < Call > ";" 
+                        | < While > 
+                        | < If >
+
+
+< Decl >            ::= < Type > < Identifier >
+
+
+< Type >            ::= "real" | "int"
+    
+
+< Assign >          ::= < Identifier > "=" < Expr > 
+    
+
+< Call >            ::= < Identifier > "(" ")"
+                        | < Identifier > "(" < Args > ")" 
+
+
+< Args >            ::= < Args > "," < Expr >
+                        | < Expr >
+
+
+< While >           ::= "while" "(" < Expr > ")" < Statement >
+                        | "while" "(" < Expr > ")" < Block >
+
+
+< If >              ::= "if" "(" < Expr > ")" < Statement >
+                        | "if" "(" < Expr > ")" < Block >
+
+
+< Expr >            ::= < Expr > "<" < Sum > 
+                        | < Expr > "<=" < Sum >
+                        | < Expr > ">" < Sum >
+                        | < Expr > ">=" < Sum >
+                        | < Expr > "==" < Sum >
+                        | < Sum >
+
+
+< Sum >             ::= < Sum > "+" < Mul >
+                        | < Sum > "-" < Mul >
+                        | < Mul >
+
+
+< Mul >             ::= < Mul > "*" < Value >
+                        | < Mul > "/" < Value >
+                        | < Value >
+
+
+< Value >           ::= < Number >
+                        | < Identifier >
+                        | < Call >
+
+
+< Identifier >      ::= < Identifier > < Letter >
+                        | < Letter >
+
+
+< Number >          ::= < Integer-Literal >
+                        | < Real-Literal > 
+
+
+< Integer-Literal > ::= < Integer-Literal > < Digit >
+                        | < Digit >
+
+
+< Real-Literal >    ::= < Integer-Literal > < Fraction-Part >
+                        | < Fraction-Part > 
+
+
+< Fraction-Part >   ::= "." < Integer-Literal >
